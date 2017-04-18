@@ -9,8 +9,9 @@ var Board = React.createClass({
 
         return new Error("The count must be a number.")
       }
+
       if (props[propName] > 100) {
-        return new Error(`Creating ${props[propName]} notes is ridiculous.`)
+        return new Error(`Creating ${props[propName]} notes is insane.`)
       }
     }
   },
