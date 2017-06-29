@@ -34,7 +34,7 @@ class Note extends Component {
             this.state !== nextState.children
   }
 
-  save = ()=> {
+  save = (e)=> {
     this.props.onSave(this.refs.newText.value, this.props.id)
     this.setState({editing : false })
   }
@@ -71,7 +71,7 @@ class Note extends Component {
   render(){
      return (
        <div>
-         <Draggable>
+         <Draggable >
            {(this.state.editing) ? this.renderForm() : this.renderDisplay()}
          </Draggable>
        </div>

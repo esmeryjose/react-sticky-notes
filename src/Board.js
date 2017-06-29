@@ -8,35 +8,32 @@ class Board extends Component {
   constructor(){
     super()
     this.state = {
+      add: true,
       notes:[]
     }
   }
 
-  componentWillMount(){
-
-  }
-
   update = (newText, id) => {
-    var notes = this.state.notes.map(
-      note => (note.id !== id) ?
-        note  :
-        {
-          ...note,
-          note: newText
-        }
-    )
-    this.setState({notes})
+
+    this.setState(pState=>{
+      let notes = pState.notes.map( note =>(
+        note.id !== id ? note :  {...note, note: newText  }
+      ))
+      return {
+        notes: notes
+      }
+    })
+
   }
 
   add = () =>{
-    var notes = [
-      ...this.state.notes,
+
+    this.setState(pState=>(
       {
-        id: this.nextId(),
-        note: 'New Note'
+        notes: [  ...pState.notes,{ id: this.nextId(), note: 'New Note'}]
       }
-    ]
-    this.setState({notes})
+    ))
+
   }
 
   nextId(){
@@ -45,13 +42,23 @@ class Board extends Component {
   }
 
   remove = (id) =>{
-    var notes = this.state.notes.filter(note => note.id !== id)
-    this.setState({notes})
+
+    this.setState(pState=>{
+      let notes = pState.notes.filter(note => note.id !== id)
+      return { notes: notes }
+    })
+
   }
 
   eachNote = (note)=>{
     return(
-      <Note key={note.id} id={note.id} onSave={this.update} onRemove={this.remove}>
+      <Note
+        // style={{right: note.right, top: note.top}}
+        key={note.id}
+        id={note.id}
+        onSave={this.update}
+        onRemove={this.remove}
+        >
         {note.note}
       </Note>
     )
