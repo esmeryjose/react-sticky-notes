@@ -53,12 +53,11 @@ class Board extends Component {
   eachNote = (note)=>{
     return(
       <Note
-        // style={{right: note.right, top: note.top}}
         key={note.id}
         id={note.id}
         onSave={this.update}
         onRemove={this.remove}
-        >
+      >
         {note.note}
       </Note>
     )
